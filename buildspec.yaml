@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      php: 7.3
+
+  pre_build:
+    commands:
+      - mkdir -p ./shared
+      - /bin/bash ./composer_install.sh
+
+  build:
+    commands:
+      - composer install --no-suggest --no-interaction
+      - mv ./composer.json ./shared/composer.json
+
+artifacts:
+  files:
+    - '**/*'
